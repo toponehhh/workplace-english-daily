@@ -9,6 +9,25 @@
   :root{
     --bg:#f4f6fb; --card:#ffffff; --ink:#1e293b; --muted:#64748b; --line:#e2e8f0;
     --blue:#2563eb; --teal:#0d9488; --amber:#d97706;
+    --ink-strong:#0f172a; --hover:#eef2f7; --on-accent:#ffffff;
+    --shadow:rgba(15,23,42,.05); --shadow-lg:rgba(15,23,42,.09);
+    color-scheme:light dark;
+  }
+  html[data-theme="dark"]{
+    --bg:#0b1220; --card:#151f31; --ink:#e2e8f0; --muted:#94a3b8; --line:#2a3a54;
+    --blue:#60a5fa; --teal:#2dd4bf; --amber:#fbbf24;
+    --ink-strong:#f1f5f9; --hover:#223046; --on-accent:#0b1220;
+    --shadow:rgba(0,0,0,.35); --shadow-lg:rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+  html[data-theme="light"]{ color-scheme:light; }
+  @media (prefers-color-scheme: dark){
+    html:not([data-theme="light"]):not([data-theme="dark"]){
+      --bg:#0b1220; --card:#151f31; --ink:#e2e8f0; --muted:#94a3b8; --line:#2a3a54;
+      --blue:#60a5fa; --teal:#2dd4bf; --amber:#fbbf24;
+      --ink-strong:#f1f5f9; --hover:#223046; --on-accent:#0b1220;
+      --shadow:rgba(0,0,0,.35); --shadow-lg:rgba(0,0,0,.5);
+    }
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
@@ -21,35 +40,69 @@
   h1 small{display:block;font-size:12px;color:var(--muted);font-weight:500;letter-spacing:3px;margin-top:5px}
   .sub{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.7}
   .stats{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-size:13px;color:var(--muted);box-shadow:0 1px 3px rgba(15,23,42,.05)}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-size:13px;color:var(--muted);box-shadow:0 1px 3px var(--shadow)}
   .stat b{color:var(--blue);font-size:17px;margin-right:5px}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;font-size:13px;color:var(--muted)}
+  .toolbar{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .filter-group{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:5px 9px;box-shadow:0 1px 3px var(--shadow);flex-wrap:wrap}
+  .filter-group .lbl{font-size:13px;color:var(--muted)}
+  .filter-group .sep{font-size:13px;color:var(--muted)}
+  .filter-group input[type="date"]{font-family:inherit;font-size:13px;color:var(--ink);background:var(--hover);border:1px solid var(--line);border-radius:8px;padding:5px 8px;outline:none}
+  .filter-group input[type="date"]:focus{border-color:var(--blue)}
+  .f-btn{padding:6px 10px;border-radius:8px}
+  .f-btn:hover{background:var(--hover);color:var(--ink)}
+  .f-count{font-size:12px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:0 1px 3px var(--shadow)}
+  .theme-group{display:flex;align-items:center;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:5px;box-shadow:0 1px 3px var(--shadow)}
+  .theme-btn{padding:6px 10px;border-radius:8px}
+  .theme-btn:hover{background:var(--hover);color:var(--ink)}
+  .theme-btn.active{background:var(--blue);color:var(--on-accent);font-weight:600}
+  .empty-tip{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:26px 18px;text-align:center;font-size:13.5px;color:var(--muted)}
   section{margin-top:30px}
   .sec-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
   .sec-head .icon{font-size:18px}
   .sec-head h2{font-size:19px;color:var(--blue)}
   .ep-list{display:grid;gap:12px}
-  a.ep{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(15,23,42,.05);transition:transform .16s,box-shadow .16s,border-color .16s}
-  a.ep:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(15,23,42,.09);border-color:var(--blue)}
+  a.ep{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
+  a.ep:hover{transform:translateY(-2px);box-shadow:0 10px 20px var(--shadow-lg);border-color:var(--blue)}
   .ep-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .ep-date{font-family:Georgia,"Times New Roman",serif;font-size:18px;font-weight:700;color:#0f172a}
-  .ep-week{font-size:12px;color:var(--muted);background:#eef2f7;border-radius:999px;padding:2px 9px}
+  .ep-date{font-family:Georgia,"Times New Roman",serif;font-size:18px;font-weight:700;color:var(--ink-strong)}
+  .ep-week{font-size:12px;color:var(--muted);background:var(--hover);border-radius:999px;padding:2px 9px}
   .ep-theme{font-size:12.5px;color:var(--teal);font-weight:600}
   .ep-arrow{margin-left:auto;color:var(--muted);font-size:14px}
   .ep-words{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.7}
   footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--muted);line-height:1.8}
   @media (max-width:560px){ h1{font-size:22px} .ep-date{font-size:16px} }
 </style>
+<script>
+/* 主题初始化：优先应用本地保存的显式偏好；未设置时交给 CSS 跟随系统 */
+(function(){try{var t=localStorage.getItem("we-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();
+</script>
 </head>
 <body>
 <!-- 更新说明：每日新增一期时，在 .ep-list 最上方照样式复制一个 <a class="ep"> 条目即可，并同步更新 .stats 数字 -->
 <div class="wrap">
   <header>
     <h1>职场英语每日一练<small>DAILY WORKPLACE ENGLISH</small></h1>
-    <p class="sub">每天 15 个职场高频知识点：单词、短语、句子各 5 个，全部附中文释义，点击页面卡片即可朗读英文（浏览器内置语音，语速可调）。</p>
+    <p class="sub">每天 15 个职场高频知识点：单词、短语、句子各 5 个，全部附中文释义，点击页面卡片即可朗读英文（浏览器内置语音，语速可调）。支持深浅主题切换（默认跟随系统）与日期筛选。</p>
     <div class="stats">
       <span class="stat"><b id="statDays">11</b>期课程</span>
       <span class="stat"><b id="statItems">165</b>个知识点</span>
       <span class="stat"><b>0</b>外部依赖 · 双击即用</span>
+    </div>
+    <div class="toolbar">
+      <div class="filter-group">
+        <span class="lbl">日期</span>
+        <input type="date" id="fStart" aria-label="开始日期">
+        <span class="sep">至</span>
+        <input type="date" id="fEnd" aria-label="结束日期">
+        <button type="button" class="f-btn" id="fClear">清除筛选</button>
+      </div>
+      <span class="f-count" id="fCount">共 11 期</span>
+      <div class="theme-group" role="group" aria-label="主题切换">
+        <button type="button" class="theme-btn" data-mode="auto">跟随系统</button>
+        <button type="button" class="theme-btn" data-mode="light">浅色</button>
+        <button type="button" class="theme-btn" data-mode="dark">深色</button>
+      </div>
     </div>
   </header>
   <main>
@@ -101,9 +154,70 @@
           <div class="ep-words">deadline · feedback · prioritize · escalate · alignment ｜ touch base · follow up · on the same page · circle back · low-hanging fruit</div>
         </a>
       </div>
+      <div class="empty-tip" id="emptyTip" style="display:none">该时间段内暂无课程，请调整日期范围。</div>
     </section>
   </main>
   <footer>💡 点击任意期数卡片进入当日学习页 ｜ 每日 07:00 由 TeleAgent 自动生成并更新</footer>
 </div>
+<script>
+"use strict";
+/* ===== 日期筛选：日历控件选择任意时间段，实时过滤期数卡片 ===== */
+var fStart = document.getElementById("fStart");
+var fEnd = document.getElementById("fEnd");
+var fClear = document.getElementById("fClear");
+var fCount = document.getElementById("fCount");
+var emptyTip = document.getElementById("emptyTip");
+var epCards = Array.prototype.slice.call(document.querySelectorAll(".ep-list a.ep"));
+
+function applyFilter(){
+  var s = fStart.value, e = fEnd.value, shown = 0;
+  epCards.forEach(function(ep){
+    var el = ep.querySelector(".ep-date");
+    var d = el ? el.textContent.trim() : "";
+    var ok = true;
+    if (s && d < s) ok = false;
+    if (ok && e && d > e) ok = false;
+    ep.style.display = ok ? "" : "none";
+    if (ok) shown++;
+  });
+  var filtered = !!(s || e);
+  fCount.textContent = filtered ? ("筛选出 " + shown + " 期") : ("共 " + shown + " 期");
+  if (shown) {
+    emptyTip.style.display = "none";
+  } else {
+    emptyTip.textContent = (s && e && s > e) ? "开始日期晚于结束日期，请调整日期范围。" : "该时间段内暂无课程，请调整日期范围。";
+    emptyTip.style.display = "";
+  }
+}
+[fStart, fEnd].forEach(function(inp){
+  inp.addEventListener("change", applyFilter);
+  inp.addEventListener("input", applyFilter);
+});
+fClear.addEventListener("click", function(){
+  fStart.value = ""; fEnd.value = ""; applyFilter();
+});
+
+/* ===== 主题切换：跟随系统 / 浅色 / 深色，偏好存 localStorage（键 we-theme） ===== */
+var THEME_KEY = "we-theme";
+function themeMode(){
+  try{var t=localStorage.getItem(THEME_KEY);if(t==="light"||t==="dark")return t;}catch(e){}
+  return "auto";
+}
+function setThemeMode(mode){
+  if(mode==="light"||mode==="dark"){document.documentElement.setAttribute("data-theme",mode);}
+  else{document.documentElement.removeAttribute("data-theme");}
+  try{
+    if(mode==="light"||mode==="dark"){localStorage.setItem(THEME_KEY,mode);}
+    else{localStorage.removeItem(THEME_KEY);}
+  }catch(e){}
+  Array.prototype.forEach.call(document.querySelectorAll(".theme-btn"),function(b){b.classList.toggle("active",b.dataset.mode===mode);});
+}
+Array.prototype.forEach.call(document.querySelectorAll(".theme-btn"),function(btn){
+  btn.addEventListener("click",function(){setThemeMode(btn.dataset.mode);});
+});
+setThemeMode(themeMode());
+
+applyFilter();
+</script>
 </body>
 </html>

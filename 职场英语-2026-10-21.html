@@ -9,6 +9,25 @@
   :root{
     --bg:#f4f6fb; --card:#ffffff; --ink:#1e293b; --muted:#64748b; --line:#e2e8f0;
     --blue:#2563eb; --teal:#0d9488; --amber:#d97706;
+    --ink-strong:#0f172a; --hover:#eef2f7; --on-accent:#ffffff;
+    --shadow:rgba(15,23,42,.05); --shadow-lg:rgba(15,23,42,.09);
+    color-scheme:light dark;
+  }
+  html[data-theme="dark"]{
+    --bg:#0b1220; --card:#151f31; --ink:#e2e8f0; --muted:#94a3b8; --line:#2a3a54;
+    --blue:#60a5fa; --teal:#2dd4bf; --amber:#fbbf24;
+    --ink-strong:#f1f5f9; --hover:#223046; --on-accent:#0b1220;
+    --shadow:rgba(0,0,0,.35); --shadow-lg:rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+  html[data-theme="light"]{ color-scheme:light; }
+  @media (prefers-color-scheme: dark){
+    html:not([data-theme="light"]):not([data-theme="dark"]){
+      --bg:#0b1220; --card:#151f31; --ink:#e2e8f0; --muted:#94a3b8; --line:#2a3a54;
+      --blue:#60a5fa; --teal:#2dd4bf; --amber:#fbbf24;
+      --ink-strong:#f1f5f9; --hover:#223046; --on-accent:#0b1220;
+      --shadow:rgba(0,0,0,.35); --shadow-lg:rgba(0,0,0,.5);
+    }
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
@@ -20,19 +39,23 @@
   .title-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
   h1{font-size:26px;letter-spacing:1px}
   h1 small{display:block;font-size:12px;color:var(--muted);font-weight:500;letter-spacing:3px;margin-top:5px}
-  .date-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;color:var(--muted);box-shadow:0 1px 3px rgba(15,23,42,.05);white-space:nowrap}
+  .date-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;color:var(--muted);box-shadow:0 1px 3px var(--shadow);white-space:nowrap}
   .sub{margin-top:10px;color:var(--muted);font-size:14px}
   .toolbar{display:flex;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap}
-  .rate-group{display:flex;align-items:center;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:5px;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+  .rate-group{display:flex;align-items:center;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:5px;box-shadow:0 1px 3px var(--shadow)}
   .rate-group .lbl{font-size:13px;color:var(--muted);padding:0 8px}
   button{font-family:inherit;cursor:pointer;border:none;background:none;font-size:13px;color:var(--muted)}
   .rate-btn{padding:6px 10px;border-radius:8px}
-  .rate-btn:hover{background:#eef2f7;color:var(--ink)}
-  .rate-btn.active{background:var(--blue);color:#fff;font-weight:600}
-  .btn-primary{background:var(--blue);color:#fff;padding:10px 18px;border-radius:11px;font-size:14px;font-weight:600;box-shadow:0 2px 8px rgba(37,99,235,.28)}
+  .rate-btn:hover{background:var(--hover);color:var(--ink)}
+  .rate-btn.active{background:var(--blue);color:var(--on-accent);font-weight:600}
+  .btn-primary{background:var(--blue);color:var(--on-accent);padding:10px 18px;border-radius:11px;font-size:14px;font-weight:600;box-shadow:0 2px 8px rgba(37,99,235,.28)}
   .btn-primary:hover{filter:brightness(1.07)}
   .btn-ghost{background:var(--card);border:1px solid var(--line);padding:10px 16px;border-radius:11px;color:var(--muted)}
   .btn-ghost:hover{color:var(--ink)}
+  .theme-group{display:flex;align-items:center;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:5px;box-shadow:0 1px 3px var(--shadow)}
+  .theme-btn{padding:6px 10px;border-radius:8px}
+  .theme-btn:hover{background:var(--hover);color:var(--ink)}
+  .theme-btn.active{background:var(--blue);color:var(--on-accent);font-weight:600}
   section{margin-top:34px}
   .sec-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
   .sec-head .icon{font-size:18px}
@@ -44,23 +67,27 @@
   .grid{display:grid;gap:13px}
   .grid.g2{grid-template-columns:repeat(auto-fill,minmax(275px,1fr))}
   .grid.g1{grid-template-columns:1fr}
-  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px 18px;cursor:pointer;box-shadow:0 1px 3px rgba(15,23,42,.05);transition:transform .16s,box-shadow .16s,border-color .16s;user-select:none}
-  .card:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(15,23,42,.09)}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px 18px;cursor:pointer;box-shadow:0 1px 3px var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s;user-select:none}
+  .card:hover{transform:translateY(-2px);box-shadow:0 10px 20px var(--shadow-lg)}
   .card:focus-visible{outline:2px solid var(--acc,var(--blue));outline-offset:2px}
   .card .spk{position:absolute;top:13px;right:15px;font-size:14px;opacity:.22;transition:opacity .16s}
   .card:hover .spk{opacity:.65}
-  .card.speaking{border-color:var(--acc);box-shadow:0 0 0 3px rgba(37,99,235,.14),0 10px 20px rgba(15,23,42,.10)}
+  .card.speaking{border-color:var(--acc);box-shadow:0 0 0 3px rgba(37,99,235,.14),0 10px 20px var(--shadow-lg)}
   .card.speaking .spk{opacity:1;animation:pulse .9s ease-in-out infinite}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
-  .card .en{font-family:Georgia,"Times New Roman",serif;font-size:21px;font-weight:700;color:#0f172a;line-height:1.4}
+  .card .en{font-family:Georgia,"Times New Roman",serif;font-size:21px;font-weight:700;color:var(--ink-strong);line-height:1.4}
   .card .uk{font-family:"Segoe UI","Microsoft YaHei",sans-serif;font-size:13px;font-weight:400;color:var(--muted);margin-left:9px}
   .card .zh{margin-top:7px;font-size:14px;color:var(--muted);line-height:1.65}
   .s-sentences .card .en{font-size:17px;font-weight:400}
-  .back-home{display:inline-flex;align-items:center;text-decoration:none;color:var(--blue);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;box-shadow:0 1px 3px rgba(15,23,42,.05);margin-bottom:16px;transition:border-color .16s,box-shadow .16s}
+  .back-home{display:inline-flex;align-items:center;text-decoration:none;color:var(--blue);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;box-shadow:0 1px 3px var(--shadow);margin-bottom:16px;transition:border-color .16s,box-shadow .16s}
   .back-home:hover{border-color:var(--blue);box-shadow:0 4px 10px rgba(15,23,42,.08)}
   footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--muted)}
   @media (max-width:560px){ h1{font-size:22px} .card .en{font-size:19px} }
 </style>
+<script>
+/* 主题初始化：优先应用本地保存的显式偏好；未设置时交给 CSS 跟随系统 */
+(function(){try{var t=localStorage.getItem("we-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();
+</script>
 </head>
 <body>
 <!-- 每日更新说明：只需修改 <title>、.date-chip 日期、.sub 文案与 DATA 数组，其余结构与样式保持不变 -->
@@ -80,6 +107,11 @@
       </div>
       <button class="btn-primary" id="btnAll">🔊 连读全部</button>
       <button class="btn-ghost" id="btnStop">停止</button>
+      <div class="theme-group" role="group" aria-label="主题切换">
+        <button type="button" class="theme-btn" data-mode="auto">跟随系统</button>
+        <button type="button" class="theme-btn" data-mode="light">浅色</button>
+        <button type="button" class="theme-btn" data-mode="dark">深色</button>
+      </div>
     </div>
   </header>
   <main id="main"></main>
@@ -237,6 +269,25 @@ Array.prototype.forEach.call(document.querySelectorAll(".rate-btn"), function (b
   });
 });
 
+/* ===== 主题切换：跟随系统 / 浅色 / 深色，偏好存 localStorage（键 we-theme） ===== */
+var THEME_KEY = "we-theme";
+function themeMode(){
+  try{var t=localStorage.getItem(THEME_KEY);if(t==="light"||t==="dark")return t;}catch(e){}
+  return "auto";
+}
+function setThemeMode(mode){
+  if(mode==="light"||mode==="dark"){document.documentElement.setAttribute("data-theme",mode);}
+  else{document.documentElement.removeAttribute("data-theme");}
+  try{
+    if(mode==="light"||mode==="dark"){localStorage.setItem(THEME_KEY,mode);}
+    else{localStorage.removeItem(THEME_KEY);}
+  }catch(e){}
+  Array.prototype.forEach.call(document.querySelectorAll(".theme-btn"),function(b){b.classList.toggle("active",b.dataset.mode===mode);});
+}
+Array.prototype.forEach.call(document.querySelectorAll(".theme-btn"),function(btn){
+  btn.addEventListener("click",function(){setThemeMode(btn.dataset.mode);});
+});
+setThemeMode(themeMode());
 window.addEventListener("beforeunload", function () { speechSynthesis.cancel(); });
 </script>
 </body>
